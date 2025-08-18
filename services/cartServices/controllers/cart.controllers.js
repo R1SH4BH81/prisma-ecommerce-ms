@@ -3,7 +3,8 @@ const prisma = new PrismaClient();
 
 const addToCart = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId =
+      req.user.role === "ADMIN" && bodyUserId ? bodyUserId : req.user.id;
     const { productId, quantity } = req.body;
 
     // Find or create user cart
