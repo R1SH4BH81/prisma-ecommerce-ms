@@ -33,8 +33,8 @@ model Product {
   price       Float
   stock       Int         @default(0)
   createdAt   DateTime    @default(now())
-  categoryId  Int
-  category    Category    @relation(fields: [categoryId], references: [id])
+  categoryId  Int? // optional
+  category    Category?   @relation(fields: [categoryId], references: [id])
   orderItems  OrderItem[]
   CartItem    CartItem[]
 }

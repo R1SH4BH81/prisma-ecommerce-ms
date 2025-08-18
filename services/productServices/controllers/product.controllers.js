@@ -81,10 +81,74 @@ const deleteProduct = async (req, res) => {
     console.log("get all product block ran");
   }
 };
+
+const createCategory = async (req, res) => {
+  try {
+    const { name } = req.body;
+
+    const category = await prisma.category.create({
+      data: { name },
+    });
+
+    res
+      .status(201)
+      .json({ message: "Category created successfully", category });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const getAllCategories = async (req, res) => {
+  try {
+    const categories = await prisma.category.findMany({
+      include: { product: true },
+    });
+
+    res.status(200).json(categories);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const updateCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    const category = await prisma.category.update({
+      where: { id: parseInt(id) },
+      data: { name },
+    });
+
+    res.json({ message: "Category updated successfully", category });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const deleteCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await prisma.category.delete({
+      where: { id: parseInt(id) },
+    });
+
+    res.json({ message: "Category deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   createProduct,
   getAllProduct,
   getProductById,
   updateProduct,
   deleteProduct,
+  createCategory,
+  getAllCategories,
+  updateCategory,
+  deleteCategory,
 };
