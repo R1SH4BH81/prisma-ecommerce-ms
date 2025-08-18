@@ -93,7 +93,7 @@ server/
 1. **Clone Repo**
 
    ```sh
-   git clone <your-repo-url>
+  https://github.com/R1SH4BH81/prisma-ecommerce-ms.git
    cd server
    ```
 
