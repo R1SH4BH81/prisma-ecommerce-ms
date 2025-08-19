@@ -5,6 +5,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5",
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
@@ -15,7 +16,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "dev": "concurrently \"node services/userServices/index.js\" \"node services/productServices/index.js\" \"node services/orderServices/index.js\" \"node services/cartServices/index.js\" \"node services/paymentServices/index.js\" \"node services/apiGateway/index.js\""
   },
   "author": "",
   "license": "ISC",
